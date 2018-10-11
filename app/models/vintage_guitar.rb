@@ -1,0 +1,2 @@
+class VintageGuitar < ApplicationRecord
+end
