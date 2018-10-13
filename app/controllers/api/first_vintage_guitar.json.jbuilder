@@ -13,10 +13,4 @@ class Api::VintageGuitarsController < ApplicationController
     @vintage_guitars = VintageGuitar.last
     render "last_vintage_guitar.json.jbuilder"
   end
-
-  def second_vintage_guitar_method
-    @vintage_guitars = VintageGuitar.second
-    render "last_vintage_guitar.json.jbuilder"
-  end
-
 end
