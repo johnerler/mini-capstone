@@ -19,4 +19,10 @@ class Api::VintageGuitarsController < ApplicationController
     render "last_vintage_guitar.json.jbuilder"
   end
 
+  def single_vintage_guitar_method
+    input_id = params["id"]
+    @vintage_guitars = VintageGuitar.find_by(id: input_id)
+    render "single_vintage_guitar.json.jbuilder"
+  end
+
 end

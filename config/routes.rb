@@ -5,5 +5,7 @@ Rails.application.routes.draw do
     get "/first_vintage_guitar_url" => "vintage_guitars#first_vintage_guitar_method"
     get "/last_vintage_guitar_url" => "vintage_guitars#last_vintage_guitar_method"
     get "/second_vintage_guitar_url" => "vintage_guitars#second_vintage_guitar_method"
+    get "/single_vintage_guitar_url" => "vintage_guitars#single_vintage_guitar_method"
+    get "/single_vintage_guitar_url/:id" => "vintage_guitars#single_vintage_guitar_method"
   end
 end
