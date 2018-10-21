@@ -4,5 +4,6 @@
   json.image_url vintage_guitar.image_url
   json.description vintage_guitar.description
   json.discounted vintage_guitar.is_discounted?
+  json.stock_status vintage_guitar.stock_status
   json.tax_total vintage_guitar.tax
   json.price_total vintage_guitar.total
