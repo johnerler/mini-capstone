@@ -7,3 +7,4 @@
   json.stock_status vintage_guitar.stock_status
   json.tax_total vintage_guitar.tax
   json.price_total vintage_guitar.total
+  json.supplier vintage_guitar.supplier
