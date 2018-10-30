@@ -24,9 +24,16 @@ class Api::VintageGuitarsController < ApplicationController
   #   @vintage_guitars = VintageGuitar.find_by(id: input_id)
   #   render "single_vintage_guitar.json.jbuilder"
   # end
+  before_action :authenticate_admin, except: [:index, :show]
 
   def index
-    @vintage_guitars = VintageGuitar.all
+    # @vintage_guitars = VintageGuitar.all
+    @vintage_guitars = current_user.vintage_guitars
+
+    if params[:category]
+      category = Category.find_by(name: params[:category])
+      @vintage_guitars = category.vintage_guitars
+    end
 
     input_search_name = params[:q]
     if input_search_name
@@ -59,11 +66,17 @@ class Api::VintageGuitarsController < ApplicationController
     @vintage_guitar = VintageGuitar.new(
       name: params["input_name"], 
       price: params["input_price"], 
-      image_url: params["input_image"], 
+      # image_url: params["input_image"], 
       description: params["input_description"],
-      stock_status: params["stock_status"]
+      stock_status: params["stock_status"],
+      supplier_id: params["supplier_id"],
+      user_id: current_user.id
       )
     if @vintage_guitar.save
+      Image.create(
+        url: params[:image_url],
+        vintage_guitar_id: @vintage_guitar.id
+      )
       render "show.json.jbuilder"
     else
       render json: {errors: @vintage_guitar.errors.full_messages}, status: 422
@@ -79,7 +92,7 @@ class Api::VintageGuitarsController < ApplicationController
     @vintage_guitar = VintageGuitar.find_by(id: params[:id])
     @vintage_guitar.name = params["input_name"] || @vintage_guitar.name 
     @vintage_guitar.price = params["input_price"] || @vintage_guitar.price
-    @vintage_guitar.image_url = params["input_image"] || @vintage_guitar.image_url
+    # @vintage_guitar.image_url = params["input_image"] || @vintage_guitar.image_url
     @vintage_guitar.description = params["input_description"] || @vintage_guitar.description
     @vintage_guitar.stock_status = params["stock_status"] || @vintage_guitar.stock_status
     if @vintage_guitar.save

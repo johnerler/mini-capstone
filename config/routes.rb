@@ -12,5 +12,10 @@ Rails.application.routes.draw do
     get "/vintage_guitars/:id" => "vintage_guitars#show"
     patch "vintage_guitars/:id" => "vintage_guitars#update"
     delete "/vintage_guitars/:id" => "vintage_guitars#destroy"
+
+    post "/users" => "users#create"
+    post "/sessions" => "sessions#create"
+    post "/orders" => "orders#create"
+    get "/orders" => "orders#index"
   end
 end

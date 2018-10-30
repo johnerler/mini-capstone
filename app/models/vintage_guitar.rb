@@ -1,4 +1,12 @@
 class VintageGuitar < ApplicationRecord
+  has_many :orders
+  belongs_to :supplier
+  # def supplier
+  #   Supplier.find_by(id: supplier_id)
+  # end
+  has_many :category_vintage_guitars
+  has_many :categories, through: :category_vintage_guitars
+
   validates :name, presence: true
   validates :name, uniqueness: true
   validates :price, presence: true
@@ -17,9 +25,20 @@ class VintageGuitar < ApplicationRecord
     price + tax
   end
 
-  def supplier
-    Supplier.find_by(id: supplier_id)
+  has_many :images
+  # def images
+  #   Image.where(product_id: id)
+  # end
+
+  def image_url_list
+    list = []
+    images.each do |image|
+      list << image.url 
+    end
+    list
   end
+  # images.map { |image| image.url }
+
 end
 
 
